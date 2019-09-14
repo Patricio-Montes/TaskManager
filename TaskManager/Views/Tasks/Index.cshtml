@@ -1,0 +1,176 @@
+﻿@model IEnumerable<TaskManager.Models.Tasks>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<!-- MDB table -->
+<div class="card">
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4"> <br />Tareas Pendientes</h3>
+    <div class="card-body">
+        <div id="table" class="table-editable">
+            <span class="table-add float-right mb-3 mr-2">
+                <a class="text-success" onclick="InvokeAddPartialView()">
+                    <i class="fas fa-plus fa-3x" aria-hidden="true"></i>
+                </a>
+            </span>
+            <span class="table-add">
+            </span>
+            <br />
+            <table class="table table-bordered table-responsive-md table-striped text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center"></th>
+                        <th class="text-center">Nro.Tarea</th>
+                        <th class="text-center">Título</th>
+                        <th class="text-center">Descripción</th>
+                        <th class="text-center">Responsable</th>
+                        <th class="text-center">Prioridad</th>
+                        <th class="text-center">Vencimiento</th>
+                        <th class="text-center">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var task in Model)
+                    {
+                        <tr>
+                            <td><a class="btn-complete" onclick="location.href='@Url.Action("UpdateState", "Tasks", new { task_id = task.Task_id, State_id = 2})'"><i class="ion-ios-arrow-down"></i></a></td>
+                            <td class="pt-3-half">@task.Task_id</td>
+                            <td class="pt-3-half">@task.Task_Title</td>
+                            <td class="pt-3-half">@task.Task_description</td>
+                            <td class="pt-3-half">@task.User_respon</td>
+                            <td class="pt-3-half">@task.Priority_id</td>
+                            <td class="pt-3-half">@task.Expiration_date</td>
+                            <td>
+                                <span class="table-remove">
+                                    <button type="button"
+                                            class="btn btn-danger btn-rounded btn-sm my-0"
+                                            onclick="DeleteTask(@task.Task_id)">
+                                        Eliminar
+                                    </button>
+                                </span>
+                                <span class="table-editable">
+                                    <button type="button"
+                                            class="btn btn-warning btn-rounded btn-sm my-0"
+                                            onclick="InvokeEditPartialView(@task.Task_id)">
+                                        Editar
+                                    </button>
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- MDB table -->
+
+<!-- Collapse Progress button -->
+<br />
+<div>
+    <a class="btn btn-primary btn-dark" data-toggle="collapse" href="#ProgressCollapse" aria-expanded="false" aria-controls="collapseExample">
+        Progreso
+    </a>
+</div>
+<!-- / Collapse Progress button -->
+
+<!-- Collapsible element -->
+<div class="collapse" id="ProgressCollapse">
+    <div class="mt-3">
+        <div class="card">
+            <h3 class="card-header text-center font-weight-bold text-uppercase py-4"> <br />Progreso</h3>
+            <div class="card-body" id="TasksProgress">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Add/Edit Tasks -->
+<div class="modal fade" id="TaskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-notify" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header bg-dark">
+                <p class="heading lead">Tarea</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+            </div>
+
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Modal Add/Edit Tasks -->
+
+
+@section scripts{
+    <script>
+       $(function () {
+          var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '') {
+               alertify.success(successMessage);
+            }
+        });
+
+        function DeleteTask(id) {
+            alertify.confirm('Advertencia', '¿Confirma eliminar la tarea '.concat(id, '?'), function () {
+                window.location.href = '@Url.Action("Delete", "Tasks")/' + id;
+            }, null);
+        };
+
+        function InvokeAddPartialView() {
+            $('#TaskModal').modal('show');
+                $.get("@Url.Action("PartialAdd", "Tasks")",
+                function (data) { $('.modal-body').html(data); })
+        };
+
+        function InvokeEditPartialView(id) {
+            $('#TaskModal').modal('show');
+            $.get("@Url.Action("PartialEdit", "Tasks")/" + id,
+                function (data) { $('.modal-body').html(data); })
+    };
+
+        $('.collapse').collapse();
+
+        window.onload = $.get("/Tasks/GetTasksProgress", null, DataBind);
+        function DataBind(TasksProgress) {
+            var setData = $("#TasksProgress");
+            var ClassColour = "";
+            for (var i = 0; i < TasksProgress.length; i++) {
+                switch(TasksProgress[i].State_id) {
+                case 1:
+                ClassColour = "bg-warning";
+                break;
+                case 2:
+                ClassColour = "bg-success";
+                break;
+                case 999:
+                ClassColour = "bg-danger";
+                break;
+                default:
+                ClassColour = "";
+                }
+                var Data =
+                "<br>" +
+                "<div class='progress'>" +
+                    "<div class='progress-bar " + ClassColour + "' role='progressbar' style='width:" + TasksProgress[i].Percentage + "%' aria-valuenow='" + TasksProgress[i].Percentage + "' aria-valuemin='0' aria-valuemax='100'>" +
+                    TasksProgress[i].Percentage + "% " + TasksProgress[i].State_description + "s" +
+                    "</div > " +
+                "</div>";
+                setData.append(Data);
+            }
+        };
+
+    </script>
+}

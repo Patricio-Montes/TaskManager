@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TaskManagerAPIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Audit_Tasks">
+    <Key>
+      <PropertyRef Name="Audit_id" />
+    </Key>
+    <Property Name="Audit_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nro_movement" Type="Int32" />
+    <Property Name="Operation_type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Operation_date" Type="DateTime" Precision="3" />
+    <Property Name="User_add" Type="Int32" />
+    <Property Name="Task_id" Type="Int32" />
+    <Property Name="Task_Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Task_description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="User_respon" Type="Int32" />
+    <Property Name="Priority_id" Type="Int32" />
+    <Property Name="Expiration_date" Type="DateTime" Precision="3" />
+    <Property Name="State_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="Task_id" />
+    </Key>
+    <Property Name="Task_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Task_Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Task_description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="User_respon" Type="Int32" Nullable="false" />
+    <Property Name="Priority_id" Type="Int32" />
+    <Property Name="Expiration_date" Type="DateTime" Precision="3" />
+    <Property Name="State_id" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="TaskManagerApiEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Audit_Tasks" EntityType="Self.Audit_Tasks" />
+    <EntitySet Name="Tasks" EntityType="Self.Task" />
+    <FunctionImport Name="GetTasksProgressByUser" ReturnType="Collection(TaskManagerAPIModel.Tasks_Progress)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="Tasks_Progress">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="State_id" Nullable="true" />
+    <Property Type="Int32" Name="Percentage" Nullable="true" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+  </ComplexType>
+</Schema>

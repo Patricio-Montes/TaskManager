@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TaskManagerAPIModelStoreContainer" CdmEntityContainer="TaskManagerApiEntities">
+    <EntitySetMapping Name="Audit_Tasks">
+      <EntityTypeMapping TypeName="TaskManagerAPIModel.Audit_Tasks">
+        <MappingFragment StoreEntitySet="Audit_Tasks">
+          <ScalarProperty Name="Audit_id" ColumnName="Audit_id" />
+          <ScalarProperty Name="Nro_movement" ColumnName="Nro_movement" />
+          <ScalarProperty Name="Operation_type" ColumnName="Operation_type" />
+          <ScalarProperty Name="Operation_date" ColumnName="Operation_date" />
+          <ScalarProperty Name="User_add" ColumnName="User_add" />
+          <ScalarProperty Name="Task_id" ColumnName="Task_id" />
+          <ScalarProperty Name="Task_Title" ColumnName="Task_Title" />
+          <ScalarProperty Name="Task_description" ColumnName="Task_description" />
+          <ScalarProperty Name="User_respon" ColumnName="User_respon" />
+          <ScalarProperty Name="Priority_id" ColumnName="Priority_id" />
+          <ScalarProperty Name="Expiration_date" ColumnName="Expiration_date" />
+          <ScalarProperty Name="State_id" ColumnName="State_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="TaskManagerAPIModel.Task">
+        <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="Task_id" ColumnName="Task_id" />
+          <ScalarProperty Name="Task_Title" ColumnName="Task_Title" />
+          <ScalarProperty Name="Task_description" ColumnName="Task_description" />
+          <ScalarProperty Name="User_respon" ColumnName="User_respon" />
+          <ScalarProperty Name="Priority_id" ColumnName="Priority_id" />
+          <ScalarProperty Name="Expiration_date" ColumnName="Expiration_date" />
+          <ScalarProperty Name="State_id" ColumnName="State_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetTasksProgressByUser" FunctionName="TaskManagerAPIModel.Store.GetTasksProgressByUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TaskManagerAPIModel.Tasks_Progress">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="State_id" ColumnName="State_id" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

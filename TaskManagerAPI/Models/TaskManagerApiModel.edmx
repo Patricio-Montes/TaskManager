@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TaskManagerAPIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Audit_Tasks">
+          <Key>
+            <PropertyRef Name="Audit_id" />
+          </Key>
+          <Property Name="Audit_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nro_movement" Type="int" />
+          <Property Name="Operation_type" Type="char" MaxLength="1" />
+          <Property Name="Operation_date" Type="datetime" />
+          <Property Name="User_add" Type="int" />
+          <Property Name="Task_id" Type="int" />
+          <Property Name="Task_Title" Type="varchar" MaxLength="100" />
+          <Property Name="Task_description" Type="varchar" MaxLength="250" />
+          <Property Name="User_respon" Type="int" />
+          <Property Name="Priority_id" Type="int" />
+          <Property Name="Expiration_date" Type="datetime" />
+          <Property Name="State_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="Task_id" />
+          </Key>
+          <Property Name="Task_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Task_Title" Type="varchar" MaxLength="100" />
+          <Property Name="Task_description" Type="varchar" MaxLength="250" />
+          <Property Name="User_respon" Type="int" Nullable="false" />
+          <Property Name="Priority_id" Type="int" />
+          <Property Name="Expiration_date" Type="datetime" />
+          <Property Name="State_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Function Name="GetTasksProgressByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="TaskManagerAPIModelStoreContainer">
+          <EntitySet Name="Audit_Tasks" EntityType="Self.Audit_Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TaskManagerAPIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Audit_Tasks">
+          <Key>
+            <PropertyRef Name="Audit_id" />
+          </Key>
+          <Property Name="Audit_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nro_movement" Type="Int32" />
+          <Property Name="Operation_type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Operation_date" Type="DateTime" Precision="3" />
+          <Property Name="User_add" Type="Int32" />
+          <Property Name="Task_id" Type="Int32" />
+          <Property Name="Task_Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Task_description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="User_respon" Type="Int32" />
+          <Property Name="Priority_id" Type="Int32" />
+          <Property Name="Expiration_date" Type="DateTime" Precision="3" />
+          <Property Name="State_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Task_id" />
+          </Key>
+          <Property Name="Task_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Task_Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Task_description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="User_respon" Type="Int32" Nullable="false" />
+          <Property Name="Priority_id" Type="Int32" />
+          <Property Name="Expiration_date" Type="DateTime" Precision="3" />
+          <Property Name="State_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="TaskManagerApiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Audit_Tasks" EntityType="Self.Audit_Tasks" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <FunctionImport Name="GetTasksProgressByUser" ReturnType="Collection(TaskManagerAPIModel.Tasks_Progress)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Tasks_Progress">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="State_id" Nullable="true" />
+          <Property Type="Int32" Name="Percentage" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TaskManagerAPIModelStoreContainer" CdmEntityContainer="TaskManagerApiEntities">
+          <EntitySetMapping Name="Audit_Tasks">
+            <EntityTypeMapping TypeName="TaskManagerAPIModel.Audit_Tasks">
+              <MappingFragment StoreEntitySet="Audit_Tasks">
+                <ScalarProperty Name="Audit_id" ColumnName="Audit_id" />
+                <ScalarProperty Name="Nro_movement" ColumnName="Nro_movement" />
+                <ScalarProperty Name="Operation_type" ColumnName="Operation_type" />
+                <ScalarProperty Name="Operation_date" ColumnName="Operation_date" />
+                <ScalarProperty Name="User_add" ColumnName="User_add" />
+                <ScalarProperty Name="Task_id" ColumnName="Task_id" />
+                <ScalarProperty Name="Task_Title" ColumnName="Task_Title" />
+                <ScalarProperty Name="Task_description" ColumnName="Task_description" />
+                <ScalarProperty Name="User_respon" ColumnName="User_respon" />
+                <ScalarProperty Name="Priority_id" ColumnName="Priority_id" />
+                <ScalarProperty Name="Expiration_date" ColumnName="Expiration_date" />
+                <ScalarProperty Name="State_id" ColumnName="State_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="TaskManagerAPIModel.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="Task_id" ColumnName="Task_id" />
+                <ScalarProperty Name="Task_Title" ColumnName="Task_Title" />
+                <ScalarProperty Name="Task_description" ColumnName="Task_description" />
+                <ScalarProperty Name="User_respon" ColumnName="User_respon" />
+                <ScalarProperty Name="Priority_id" ColumnName="Priority_id" />
+                <ScalarProperty Name="Expiration_date" ColumnName="Expiration_date" />
+                <ScalarProperty Name="State_id" ColumnName="State_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetTasksProgressByUser" FunctionName="TaskManagerAPIModel.Store.GetTasksProgressByUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TaskManagerAPIModel.Tasks_Progress">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="State_id" ColumnName="State_id" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

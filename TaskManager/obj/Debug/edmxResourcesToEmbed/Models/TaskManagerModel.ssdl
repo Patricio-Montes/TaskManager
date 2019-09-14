@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TaskManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Priorities_Tasks">
+    <Key>
+      <PropertyRef Name="Priority_id" />
+    </Key>
+    <Property Name="Priority_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date_add" Type="datetime" />
+    <Property Name="Date_last_upd" Type="datetime" />
+    <Property Name="User_add" Type="int" />
+    <Property Name="User_last_upd" Type="int" />
+    <Property Name="Priority_description" Type="varchar" MaxLength="60" />
+  </EntityType>
+  <EntityType Name="Tasks_Progress">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="State_id" Type="int" />
+    <Property Name="State_description" Type="varchar" MaxLength="60" />
+    <Property Name="Percentage" Type="numeric" Precision="18" Scale="1" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="User_id" />
+    </Key>
+    <Property Name="User_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date_add" Type="datetime" />
+    <Property Name="Date_last_upd" Type="datetime" />
+    <Property Name="User_add" Type="int" />
+    <Property Name="User_last_upd" Type="int" />
+    <Property Name="User_name" Type="varchar" MaxLength="50" />
+    <Property Name="Usr_password" Type="varchar" MaxLength="20" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Surname" Type="varchar" MaxLength="50" />
+    <Property Name="Email_adrress" Type="varchar" MaxLength="60" />
+  </EntityType>
+  <Function Name="GetTasksProgressByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userid" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="TaskManagerModelStoreContainer">
+    <EntitySet Name="Priorities_Tasks" EntityType="Self.Priorities_Tasks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tasks_Progress" EntityType="Self.Tasks_Progress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TaskManagerModelStoreContainer" CdmEntityContainer="TaskManagerEntities">
+    <EntitySetMapping Name="Priorities_Tasks">
+      <EntityTypeMapping TypeName="TaskManagerModel.Priorities_Tasks">
+        <MappingFragment StoreEntitySet="Priorities_Tasks">
+          <ScalarProperty Name="Priority_id" ColumnName="Priority_id" />
+          <ScalarProperty Name="Date_add" ColumnName="Date_add" />
+          <ScalarProperty Name="Date_last_upd" ColumnName="Date_last_upd" />
+          <ScalarProperty Name="User_add" ColumnName="User_add" />
+          <ScalarProperty Name="User_last_upd" ColumnName="User_last_upd" />
+          <ScalarProperty Name="Priority_description" ColumnName="Priority_description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks_Progress">
+      <EntityTypeMapping TypeName="TaskManagerModel.Tasks_Progress">
+        <MappingFragment StoreEntitySet="Tasks_Progress">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="State_id" ColumnName="State_id" />
+          <ScalarProperty Name="State_description" ColumnName="State_description" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="TaskManagerModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="User_id" ColumnName="User_id" />
+          <ScalarProperty Name="Date_add" ColumnName="Date_add" />
+          <ScalarProperty Name="Date_last_upd" ColumnName="Date_last_upd" />
+          <ScalarProperty Name="User_add" ColumnName="User_add" />
+          <ScalarProperty Name="User_last_upd" ColumnName="User_last_upd" />
+          <ScalarProperty Name="User_name" ColumnName="User_name" />
+          <ScalarProperty Name="Usr_password" ColumnName="Usr_password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Email_adrress" ColumnName="Email_adrress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetTasksProgressByUser" FunctionName="TaskManagerModel.Store.GetTasksProgressByUser" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,49 @@
+﻿@model TaskManager.Models.Tasks
+
+@{
+    ViewBag.Title = "_AddTasks";
+}
+
+
+<div class="form-body">
+    @using (Html.BeginForm())
+    {
+        <!-- Default form contact -->
+        <form class="text-center border border-light p-5">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Task_Title)
+                @Html.EditorFor(model => model.Task_Title, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Task_description)
+                @Html.EditorFor(model => model.Task_description, new { htmlAttributes = new { @class = "form-control rounded-0", @row = "3" } })
+            </div>
+            <div>
+                <label>Prioridad</label>
+                @Html.DropDownListFor(model => model.Priority_id, new SelectList(Model.Priorities, "Priority_id", "Priority_description", "Prioridad"), new { @class = "browser-default custom-select mb-4" })
+            </div>
+            <div>
+                <label>Responsable</label>
+                @Html.DropDownListFor(model => model.User_respon, new SelectList(Model.Responsible, "User_id", "Name", "Responsable"), new { @class = "browser-default custom-select mb-4" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Expiration_date)
+                @Html.EditorFor(model => model.Expiration_date, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            <!-- Message
+            <div class="form-group">
+                <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Message"></textarea>
+            </div>-->
+            <div class="modal-footer justify-content-xl-end">
+                <button type="button" class="btn btn-primary btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary btn-success">Agregar</button>
+            </div>
+        </form>
+    }
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+}

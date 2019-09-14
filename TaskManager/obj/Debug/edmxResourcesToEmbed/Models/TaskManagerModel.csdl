@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TaskManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Priorities_Tasks">
+    <Key>
+      <PropertyRef Name="Priority_id" />
+    </Key>
+    <Property Name="Priority_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date_add" Type="DateTime" Precision="3" />
+    <Property Name="Date_last_upd" Type="DateTime" Precision="3" />
+    <Property Name="User_add" Type="Int32" />
+    <Property Name="User_last_upd" Type="Int32" />
+    <Property Name="Priority_description" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Tasks_Progress">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="State_id" Type="Int32" />
+    <Property Name="State_description" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="Percentage" Type="Decimal" Precision="18" Scale="1" />
+    <Property Name="UserID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="User_id" />
+    </Key>
+    <Property Name="User_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date_add" Type="DateTime" Precision="3" />
+    <Property Name="Date_last_upd" Type="DateTime" Precision="3" />
+    <Property Name="User_add" Type="Int32" />
+    <Property Name="User_last_upd" Type="Int32" />
+    <Property Name="User_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Usr_password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email_adrress" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="TaskManagerEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Priorities_Tasks" EntityType="Self.Priorities_Tasks" />
+    <EntitySet Name="Tasks_Progress" EntityType="Self.Tasks_Progress" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <FunctionImport Name="GetTasksProgressByUser" EntitySet="Tasks_Progress" ReturnType="Collection(TaskManagerModel.Tasks_Progress)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

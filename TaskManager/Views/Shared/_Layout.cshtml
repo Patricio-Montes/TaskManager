@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    @*@Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/mdb.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/alertify.rtl.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/themes/default.min.css" rel="stylesheet" />
+    <link href="~/Content/tasksite.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!--Menu-->
+    @*<div class="left">
+        <div class="item">
+            <i class="fas fa-fw fa-bars"></i>
+        </div>
+        <div class="item active">
+            <i class="fas fa-fw fa-map-marked-alt"></i> Map
+        </div>
+        <div class="item">
+            <i class="fas fa-fw fa-columns"></i> Split
+        </div>
+        <div class="item">
+            <i class="fas fa-fw fa-th"></i> Grid
+        </div>
+        <div class="item">
+            <i class="fas fa-fw fa-user-circle"></i> Dash
+        </div>
+    </div>*@
+    <!-- /Menu -->
+
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                @Html.ActionLink("Gestión de Tareas", "Index", "Tasks", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+        </div>
+    </div>*@
+
+    <!-- As a link -->
+<nav class="navbar navbar-dark bg-dark">
+    @Html.ActionLink("Gestión de Tareas", "Index", "Tasks", new { area = "" }, new { @class = "navbar-brand" })
+</nav>
+
+ <br />
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        </footer>
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")*@
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/alertify.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/mdb.min.js"></script>
+    @RenderSection("scripts", required: true)
+</body>
+</html>

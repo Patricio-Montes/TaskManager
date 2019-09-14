@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TaskManagerAPIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Audit_Tasks">
+    <Key>
+      <PropertyRef Name="Audit_id" />
+    </Key>
+    <Property Name="Audit_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nro_movement" Type="int" />
+    <Property Name="Operation_type" Type="char" MaxLength="1" />
+    <Property Name="Operation_date" Type="datetime" />
+    <Property Name="User_add" Type="int" />
+    <Property Name="Task_id" Type="int" />
+    <Property Name="Task_Title" Type="varchar" MaxLength="100" />
+    <Property Name="Task_description" Type="varchar" MaxLength="250" />
+    <Property Name="User_respon" Type="int" />
+    <Property Name="Priority_id" Type="int" />
+    <Property Name="Expiration_date" Type="datetime" />
+    <Property Name="State_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="Task_id" />
+    </Key>
+    <Property Name="Task_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Task_Title" Type="varchar" MaxLength="100" />
+    <Property Name="Task_description" Type="varchar" MaxLength="250" />
+    <Property Name="User_respon" Type="int" Nullable="false" />
+    <Property Name="Priority_id" Type="int" />
+    <Property Name="Expiration_date" Type="datetime" />
+    <Property Name="State_id" Type="int" Nullable="false" />
+  </EntityType>
+  <Function Name="GetTasksProgressByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userid" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="TaskManagerAPIModelStoreContainer">
+    <EntitySet Name="Audit_Tasks" EntityType="Self.Audit_Tasks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
