@@ -3,9 +3,11 @@
     height: 28px;
     width: 28px;
     border-radius: 50%;
-    border: 2px solid green;
+    border: 3px solid green;
 }
-
+    .btn-complete:hover {
+        background-color: green;
+    }
 
 /* Menu styles */
 .Menu,

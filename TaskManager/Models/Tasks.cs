@@ -40,6 +40,7 @@ namespace TaskManager.Models
         public string Task_Title { get; set; }
         [Required(ErrorMessage = "La descripción es requerida")]
         [Display(Name = "Descripción")]
+        [DataType(DataType.MultilineText)]
         public string Task_description { get; set; }
         [Display(Name = "Usuario Responsable")]
         public Nullable<int> User_respon { get; set; }

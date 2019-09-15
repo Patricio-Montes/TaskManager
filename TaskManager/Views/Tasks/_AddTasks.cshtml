@@ -9,9 +9,10 @@
     @using (Html.BeginForm())
     {
         <!-- Default form contact -->
-        <form class="text-center border border-light p-5">
+        <form class="text-center border border-light p-5" id="formadd">
             <div class="form-group">
                 @Html.LabelFor(model => model.Task_Title)
+                @Html.ValidationMessageFor(model => model.Task_Title)
                 @Html.EditorFor(model => model.Task_Title, new { htmlAttributes = new { @class = "form-control" } })
             </div>
 
@@ -46,4 +47,11 @@
 
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval");
+    <script>
+        // Disable keyup validation on key up
+        var validator = $("#formadd").data("validator");
+        if (validator)
+        validator.settings.onkeyup = false;
+    </script>
+    
 }
