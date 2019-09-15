@@ -139,6 +139,7 @@ namespace TaskManagerAPI.Controllers
                     // Para el ejemplo se define hardcode al usuario admin. En un caso real deberia tomarse de sesión. 
                     User_add = 1,
                     Task_id = task.Task_id,
+                    Task_Title = task.Task_Title,
                     // Se identifica el último nro de movimiento generado para la tarea 
                     Nro_movement = db.Audit_Tasks.Where(a => a.Task_id == task.Task_id).Max(a => a.Nro_movement) ?? 0 + 1,
                     User_respon = task.User_respon,

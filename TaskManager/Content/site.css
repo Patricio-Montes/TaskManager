@@ -5,3 +5,50 @@
     border-radius: 50%;
     border: 2px solid green;
 }
+
+
+/* Menu styles */
+.Menu,
+.right {
+    top: 50%;
+    float: left;
+}
+
+.Menu {
+    background: #212121;
+    white-space: nowrap;
+    width: 50px;
+    transition: width .5s;
+    position: fixed;
+    z-index: 1000;
+    top: 100px;
+}
+
+.right {
+    background: #fff;
+    transition: width 1s;
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 1px;
+}
+
+.Menu:hover {
+    width: 250px;
+}
+
+.item:hover {
+
+    background-color: #6c757d;
+}
+
+.Menu .fas {
+    margin: 15px;
+    width: 20px;
+    color: #fff;
+}
+
+.item {
+    height: 50px;
+    overflow: hidden;
+    color: #fff;
+}
