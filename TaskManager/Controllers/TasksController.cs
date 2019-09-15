@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Mvc;
 using TaskManager.Models;
+using WebApiClient;
 
 namespace TaskManager.Controllers
 {
@@ -12,7 +13,7 @@ namespace TaskManager.Controllers
         {
             IEnumerable<Tasks> taskList;
 
-            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Tasks").Result;
+            HttpResponseMessage response = BaseAddress.WebApiClient.GetAsync("Tasks").Result;
             taskList = response.Content.ReadAsAsync<IEnumerable<Tasks>>().Result;
             if (response.IsSuccessStatusCode)
             {
@@ -26,7 +27,7 @@ namespace TaskManager.Controllers
 
         public ActionResult Delete(int id)
         {
-            HttpResponseMessage response = GlobalVariables.WebApiClient.DeleteAsync("Tasks/" + id.ToString()).Result;
+            HttpResponseMessage response = BaseAddress.WebApiClient.DeleteAsync("Tasks/" + id.ToString()).Result;
             if (response.IsSuccessStatusCode)
             {
                 TempData["SuccessMessage"] = "Se elimino la Tarea " + id.ToString();
@@ -54,7 +55,7 @@ namespace TaskManager.Controllers
         {
             HttpResponseMessage response = new HttpResponseMessage();
             task.State_id = 1;
-            response = GlobalVariables.WebApiClient.PostAsJsonAsync("Tasks", task).Result;
+            response = BaseAddress.WebApiClient.PostAsJsonAsync("Tasks", task).Result;
             if (response.IsSuccessStatusCode)
             {
                 TempData["SuccessMessage"] = "Se añadio la Tarea ";
@@ -73,7 +74,7 @@ namespace TaskManager.Controllers
             {
                 if (Request.IsAjaxRequest())
                 {
-                    HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Tasks/" + id.ToString()).Result;
+                    HttpResponseMessage response = BaseAddress.WebApiClient.GetAsync("Tasks/" + id.ToString()).Result;
                     return PartialView("_EditTasks", response.Content.ReadAsAsync<Tasks>().Result);
                 }
                 else
@@ -95,7 +96,7 @@ namespace TaskManager.Controllers
                 // Provisorio, definir estado edicion y esto realizarlo en el servicio una vez se haya auditado el estado anterior del registro.
                 task.State_id = 1;
                 HttpResponseMessage response = new HttpResponseMessage();
-                response = GlobalVariables.WebApiClient.PutAsJsonAsync("Tasks/" + task.Task_id.ToString(), task).Result;
+                response = BaseAddress.WebApiClient.PutAsJsonAsync("Tasks/" + task.Task_id.ToString(), task).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["SuccessMessage"] = "Se edito la Tarea " + task.Task_id.ToString();
