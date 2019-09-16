@@ -12,7 +12,7 @@ namespace TaskManager.Controllers
         public ActionResult Index()
         {
             IEnumerable<Tasks> taskList;
-            // Request de las tareas del usuario logueado, excepto las que se encuentran compeltadas
+            // Request de todas las tareas pendientes por usuario logueado
             HttpResponseMessage response = BaseAddress.WebApiClient.GetAsync("Tasks?userID=1&stateID=1").Result;
             taskList = response.Content.ReadAsAsync<IEnumerable<Tasks>>().Result;
             if (response.IsSuccessStatusCode)

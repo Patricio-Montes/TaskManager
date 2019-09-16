@@ -29,7 +29,7 @@ namespace TaskManagerAPI.Controllers
                                                from Tasks with (nolock)
                                                where User_respon = 1         
                                                union
-                                               select Task_id, Task_Title, Task_description, User_respon, Priority_id, Expiration_date, State_id
+                                               select Task_id, Task_Title, Task_description, User_respon, Priority_id, Expiration_date, 5 State_id
                                                from Audit_Tasks with (nolock)
                                                where Audit_Tasks.User_respon = 1 and Audit_Tasks.Operation_type = 'D'").ToList();
             return taskList;
@@ -88,7 +88,7 @@ namespace TaskManagerAPI.Controllers
             try
             {
                 db.SaveChanges();
-                TaskAudit(task, "E");
+                TaskAudit(task, "U");
             }
             catch (DbUpdateConcurrencyException)
             {

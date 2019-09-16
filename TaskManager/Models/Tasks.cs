@@ -65,6 +65,12 @@ namespace TaskManager.Models
             return TaskProgress.GetProgress(userID);
         }
 
+        /// <summary>
+        /// Actualiza el estado de una tarea determinada.  
+        /// </summary>
+        /// <param name="task_id"> ID de la tarea a actualizar</param>
+        /// <param name="state_id"> Estado resultante de la tarea. Tales como: Pendiente, Completada, Asignada </param>
+        /// <returns></returns>
         public bool UpdateState(int task_id, int state_id)
         {
             string strSQL = "update Tasks set State_id = " + state_id + " where Task_id = " + task_id;

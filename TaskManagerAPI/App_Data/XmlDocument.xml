@@ -502,7 +502,7 @@
         </member>
         <member name="M:TaskManagerAPI.Controllers.TasksController.GetTask(System.Int32)">
             <summary>
-            Obtiene una tarea especifica
+            Obtiene una tarea específica, determinada por el número solicitado. 
             </summary>
             <param name="id"> Número de la tarea que se pretende obtener </param>
             <returns></returns>
