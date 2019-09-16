@@ -13,7 +13,7 @@ namespace TaskManager.Controllers
         {
             IEnumerable<Tasks> taskList;
             // Request de las tareas del usuario logueado, excepto las que se encuentran compeltadas
-            HttpResponseMessage response = BaseAddress.WebApiClient.GetAsync("Tasks?userID=1&stateID=2").Result;
+            HttpResponseMessage response = BaseAddress.WebApiClient.GetAsync("Tasks?userID=1&stateID=1").Result;
             taskList = response.Content.ReadAsAsync<IEnumerable<Tasks>>().Result;
             if (response.IsSuccessStatusCode)
             {
@@ -53,6 +53,7 @@ namespace TaskManager.Controllers
                 return RedirectToAction("Error");
             }
         }
+
 
         public ActionResult PartialAdd(Tasks task)
         {

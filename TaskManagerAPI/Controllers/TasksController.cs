@@ -30,8 +30,8 @@ namespace TaskManagerAPI.Controllers
 
         public IQueryable<Task> GetTasks(int userID, int stateID)
         {
-            // Tareas por usuario y por estado. Se utiliza para excluir de la lista de tareas pendientes las completadas (Estado 2)
-            return db.Tasks.Where(a => a.User_respon == userID && a.State_id != stateID);
+            // Tareas pendientes por usuario
+            return db.Tasks.Where(a => a.User_respon == userID && a.State_id == stateID);
         }
 
         [ResponseType(typeof(Task))]
@@ -154,7 +154,7 @@ namespace TaskManagerAPI.Controllers
                     Task_id = task.Task_id,
                     Task_Title = task.Task_Title,
                     // Se identifica el último nro de movimiento generado para la tarea 
-                    Nro_movement = db.Audit_Tasks.Where(a => a.Task_id == task.Task_id).Max(a => a.Nro_movement) ?? 0 + 1,
+                    Nro_movement = db.Audit_Tasks.Where(a => a.Task_id == task.Task_id).Max(a => a.Nro_movement + 1) ?? 1,
                     User_respon = task.User_respon,
                     Task_description = task.Task_description,
                     Priority_id = task.Priority_id,
