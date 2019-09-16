@@ -149,3 +149,4 @@ C:\Users\monte\Documents\GitHub\TaskManager\TaskManagerAPI\obj\Debug\TaskManager
 C:\Users\monte\Documents\GitHub\TaskManager\TaskManagerAPI\obj\Debug\TaskManagerAPI.csproj.CopyComplete
 C:\Users\monte\Documents\GitHub\TaskManager\TaskManagerAPI\obj\Debug\TaskManagerAPI.dll
 C:\Users\monte\Documents\GitHub\TaskManager\TaskManagerAPI\obj\Debug\TaskManagerAPI.pdb
+C:\Users\monte\Documents\GitHub\TaskManager\TaskManagerAPI\bin\XmlDocument.xml

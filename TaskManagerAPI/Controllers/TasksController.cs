@@ -11,10 +11,17 @@ using TaskManagerAPI.Models;
 
 namespace TaskManagerAPI.Controllers
 {
+    /// <summary>
+    /// Clase controladora del CRUD de tareas. 
+    /// </summary>
     public class TasksController : ApiController
     {
         private readonly TaskManagerApiEntities db = new TaskManagerApiEntities();
 
+        /// <summary>
+        /// Retorna una lista de todas las tareas asociadas a un usuario.
+        /// </summary>
+        /// <returns></returns>
         public List<Task> GetTasks()
         {
             // Se realiza un union para recuperar las tareas eliminadas. Se encuentran auditadas en la tabla Audit_Tasks. 
@@ -28,12 +35,23 @@ namespace TaskManagerAPI.Controllers
             return taskList;
         }
 
+        /// <summary>
+        /// Retorna una lista de tareas por usuario, en un estado específico. 
+        /// </summary>
+        /// <param name="userID"> Usuario del que se pretenden obtener sus tareas. </param>
+        /// <param name="stateID"> Estado de las tareas que se pretenden obtener para el usuario. </param>
+        /// <returns></returns>
         public IQueryable<Task> GetTasks(int userID, int stateID)
         {
             // Tareas pendientes por usuario
             return db.Tasks.Where(a => a.User_respon == userID && a.State_id == stateID);
         }
 
+        /// <summary>
+        /// Obtiene una tarea específica, determinada por el número solicitado. 
+        /// </summary>
+        /// <param name="id"> Número de la tarea que se pretende obtener </param>
+        /// <returns></returns>
         [ResponseType(typeof(Task))]
         public IHttpActionResult GetTask(int id)
         {
@@ -46,7 +64,12 @@ namespace TaskManagerAPI.Controllers
             return Ok(task);
         }
 
-        // PUT: api/Tasks/5
+        /// <summary>
+        /// Actualiza una tarea mediante un número de tarea especifico
+        /// </summary>
+        /// <param name="id"> Número de tarea que se pretende actualizar </param>
+        /// <param name="task"> Instancia final de la tarea que se actualizará </param>
+        /// <returns></returns>
         [ResponseType(typeof(void))]
         public IHttpActionResult PutTask(int id, Task task)
         {
@@ -82,6 +105,11 @@ namespace TaskManagerAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        /// <summary>
+        /// Crea una nueva tarea
+        /// </summary>
+        /// <param name="task"> Instancia de la tarea a crear </param>
+        /// <returns></returns>
         [ResponseType(typeof(Task))]
         public IHttpActionResult PostTask(Task task)
 
@@ -97,6 +125,11 @@ namespace TaskManagerAPI.Controllers
             return CreatedAtRoute("DefaultApi", new { id = task.Task_id }, task);
         }
 
+        /// <summary>
+        /// Elimina fisicamente una tarea
+        /// </summary>
+        /// <param name="id"> Número de la tarea que se eliminará </param>
+        /// <returns></returns>
         [ResponseType(typeof(Task))]
         public IHttpActionResult DeleteTask(int id)
         {
@@ -126,6 +159,10 @@ namespace TaskManagerAPI.Controllers
             return Ok(task);
         }
 
+        /// <summary>
+        /// Disposing 
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -135,12 +172,22 @@ namespace TaskManagerAPI.Controllers
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// Verifica que exista una tarea sobre la que se realizara algun tratamiento
+        /// </summary>
+        /// <param name="id">Número de la tarea a verificar </param>
+        /// <returns></returns>
         private bool TaskExists(int id)
         {
             return db.Tasks.Count(e => e.Task_id == id) > 0;
         }
 
-        // Metodo responsable de preparar e insertar el objeto auditoria.  
+        /// <summary>
+        /// Metodo responsable de preparar e insertar el objeto auditoria.   
+        /// </summary>
+        /// <param name="task"> Instancia de la tarea a auditar </param>
+        /// <param name="operationtype">Tipo de operacion C:Create, D:Delete, E:Edit </param>
+
         private void TaskAudit(Task task, string operationtype)
         {
             if (task != null && !string.IsNullOrEmpty(operationtype))
