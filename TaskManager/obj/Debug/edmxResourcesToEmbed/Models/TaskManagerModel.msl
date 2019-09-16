@@ -13,6 +13,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="States_Tasks">
+      <EntityTypeMapping TypeName="TaskManagerModel.States_Tasks">
+        <MappingFragment StoreEntitySet="States_Tasks">
+          <ScalarProperty Name="State_id" ColumnName="State_id" />
+          <ScalarProperty Name="Date_add" ColumnName="Date_add" />
+          <ScalarProperty Name="Date_last_upd" ColumnName="Date_last_upd" />
+          <ScalarProperty Name="User_add" ColumnName="User_add" />
+          <ScalarProperty Name="User_last_upd" ColumnName="User_last_upd" />
+          <ScalarProperty Name="State_description" ColumnName="State_description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Tasks_Progress">
       <EntityTypeMapping TypeName="TaskManagerModel.Tasks_Progress">
         <MappingFragment StoreEntitySet="Tasks_Progress">

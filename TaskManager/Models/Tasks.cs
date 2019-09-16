@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 
 namespace TaskManager.Models
@@ -13,12 +11,7 @@ namespace TaskManager.Models
         {
             Priorities = GetPriorities();
             Responsible = GetUsersResponsible();
-        }
-
-        public List<Tasks_Progress> GetTasksProgress(int userID)
-        {
-            Tasks_Progress TaskProgress = new Tasks_Progress();
-            return TaskProgress.GetProgress(userID);
+            States = GetTasksStates();
         }
 
         private List<Priorities_Tasks> GetPriorities()
@@ -32,6 +25,13 @@ namespace TaskManager.Models
             User UserList = new User();
             return UserList.GetList();
         }
+
+        private List<States_Tasks> GetTasksStates()
+        {
+            States_Tasks StatesList = new States_Tasks();
+            return StatesList.GetList();
+        }
+
 
         [Display(Name = "Nro. Tarea")]
         public int Task_id { get; set; }
@@ -57,6 +57,13 @@ namespace TaskManager.Models
         public List<Priorities_Tasks> Priorities = new List<Priorities_Tasks>();
         public List<User> Responsible = new List<User>();
         public List<Tasks_Progress> Progress = new List<Tasks_Progress>();
+        public List<States_Tasks> States = new List<States_Tasks>();
+
+        public List<Tasks_Progress> GetTasksProgress(int userID)
+        {
+            Tasks_Progress TaskProgress = new Tasks_Progress();
+            return TaskProgress.GetProgress(userID);
+        }
 
         public bool UpdateState(int task_id, int state_id)
         {

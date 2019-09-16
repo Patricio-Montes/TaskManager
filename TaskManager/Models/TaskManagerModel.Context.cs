@@ -28,6 +28,7 @@ namespace TaskManager.Models
         }
     
         public virtual DbSet<Priorities_Tasks> Priorities_Tasks { get; set; }
+        public virtual DbSet<States_Tasks> States_Tasks { get; set; }
         public virtual DbSet<Tasks_Progress> Tasks_Progress { get; set; }
         public virtual DbSet<User> Users { get; set; }
     

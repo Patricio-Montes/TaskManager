@@ -11,6 +11,17 @@
     <Property Name="User_last_upd" Type="Int32" />
     <Property Name="Priority_description" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="States_Tasks">
+    <Key>
+      <PropertyRef Name="State_id" />
+    </Key>
+    <Property Name="State_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date_add" Type="DateTime" Precision="3" />
+    <Property Name="Date_last_upd" Type="DateTime" Precision="3" />
+    <Property Name="User_add" Type="Int32" />
+    <Property Name="User_last_upd" Type="Int32" />
+    <Property Name="State_description" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityType Name="Tasks_Progress">
     <Key>
       <PropertyRef Name="Id" />
@@ -18,7 +29,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="State_id" Type="Int32" />
     <Property Name="State_description" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-    <Property Name="Percentage" Type="Decimal" Precision="18" Scale="1" />
+    <Property Name="Percentage" Type="Int32" />
     <Property Name="UserID" Type="Int32" />
   </EntityType>
   <EntityType Name="User">
@@ -38,6 +49,7 @@
   </EntityType>
   <EntityContainer Name="TaskManagerEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Priorities_Tasks" EntityType="Self.Priorities_Tasks" />
+    <EntitySet Name="States_Tasks" EntityType="Self.States_Tasks" />
     <EntitySet Name="Tasks_Progress" EntityType="Self.Tasks_Progress" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <FunctionImport Name="GetTasksProgressByUser" EntitySet="Tasks_Progress" ReturnType="Collection(TaskManagerModel.Tasks_Progress)">

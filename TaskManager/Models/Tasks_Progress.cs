@@ -18,7 +18,7 @@ namespace TaskManager.Models
         public int Id { get; set; }
         public Nullable<int> State_id { get; set; }
         public string State_description { get; set; }
-        public Nullable<decimal> Percentage { get; set; }
+        public Nullable<int> Percentage { get; set; }
         public Nullable<int> UserID { get; set; }
 
         public List<Tasks_Progress> GetProgress(int userID)

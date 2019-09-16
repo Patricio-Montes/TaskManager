@@ -20,18 +20,22 @@
             <th class="th-sm">
                 Prioridad
             </th>
+            <th class="th-sm">
+                Estado
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var task in Model)
         {
-            <tr>
-                <td class="pt-3-half">@task.Task_id</td>
-                <td class="pt-3-half">@task.Task_Title</td>
-                <td class="pt-3-half">@task.Task_description</td>
-                <td class="pt-3-half">@task.Responsible.Find(x => x.User_id == task.User_respon).Name</td>
-                <td class="pt-3-half">@task.Priorities.Find(x => x.Priority_id == task.Priority_id).Priority_description</td>
-            </tr>
+        <tr>
+            <td class="pt-3-half">@task.Task_id</td>
+            <td class="pt-3-half">@task.Task_Title</td>
+            <td class="pt-3-half">@task.Task_description</td>
+            <td class="pt-3-half">@task.Responsible.Find(x => x.User_id == task.User_respon).Name</td>
+            <td class="pt-3-half">@task.Priorities.Find(x => x.Priority_id == task.Priority_id).Priority_description</td>
+            <td class="pt-3-half">@task.States.Find(x => x.State_id == task.State_id).State_description</td>
+        </tr>
         }
     </tbody>
     <tfoot>
@@ -51,6 +55,9 @@
             <th>
                 Prioridad
             </th>
+            <th>
+                Estado
+            </th>
         </tr>
     </tfoot>
 </table>
@@ -63,22 +70,6 @@
     <script>
         $(document).ready(function () {
             $('#dtBasicExample').DataTable()
-            //        {
-            //            "ajax": {
-            //                "url": "/Tasks/AllTasks",
-            //                "type": "GET",
-            //                "datatype": "json"
-            //            },
-            //            "columns": [
-            //                { "data": "Task_id" },
-            //                { "data": "Task_Title" },
-            //                { "data": "Task_description" },
-            //                { "data": "Responsible" },
-            //                { "data": "Priorities" },
-            //                { "data": "Expiration_date" },
-            //                { "data": "State_id" }
-            //            ]
-            //        });
         });
     </script>
 }

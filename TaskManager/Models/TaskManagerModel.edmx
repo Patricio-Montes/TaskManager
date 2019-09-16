@@ -16,6 +16,17 @@
           <Property Name="User_last_upd" Type="int" />
           <Property Name="Priority_description" Type="varchar" MaxLength="60" />
         </EntityType>
+        <EntityType Name="States_Tasks">
+          <Key>
+            <PropertyRef Name="State_id" />
+          </Key>
+          <Property Name="State_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date_add" Type="datetime" />
+          <Property Name="Date_last_upd" Type="datetime" />
+          <Property Name="User_add" Type="int" />
+          <Property Name="User_last_upd" Type="int" />
+          <Property Name="State_description" Type="varchar" MaxLength="60" />
+        </EntityType>
         <EntityType Name="Tasks_Progress">
           <Key>
             <PropertyRef Name="Id" />
@@ -23,7 +34,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="State_id" Type="int" />
           <Property Name="State_description" Type="varchar" MaxLength="60" />
-          <Property Name="Percentage" Type="numeric" Precision="18" Scale="1" />
+          <Property Name="Percentage" Type="int" />
           <Property Name="UserID" Type="int" />
         </EntityType>
         <EntityType Name="Users">
@@ -46,6 +57,7 @@
         </Function>
         <EntityContainer Name="TaskManagerModelStoreContainer">
           <EntitySet Name="Priorities_Tasks" EntityType="Self.Priorities_Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States_Tasks" EntityType="Self.States_Tasks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tasks_Progress" EntityType="Self.Tasks_Progress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -65,6 +77,17 @@
           <Property Name="User_last_upd" Type="Int32" />
           <Property Name="Priority_description" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="States_Tasks">
+          <Key>
+            <PropertyRef Name="State_id" />
+          </Key>
+          <Property Name="State_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date_add" Type="DateTime" Precision="3" />
+          <Property Name="Date_last_upd" Type="DateTime" Precision="3" />
+          <Property Name="User_add" Type="Int32" />
+          <Property Name="User_last_upd" Type="Int32" />
+          <Property Name="State_description" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="Tasks_Progress">
           <Key>
             <PropertyRef Name="Id" />
@@ -72,7 +95,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="State_id" Type="Int32" />
           <Property Name="State_description" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="Percentage" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Percentage" Type="Int32" />
           <Property Name="UserID" Type="Int32" />
         </EntityType>
         <EntityType Name="User">
@@ -92,6 +115,7 @@
         </EntityType>
         <EntityContainer Name="TaskManagerEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Priorities_Tasks" EntityType="Self.Priorities_Tasks" />
+          <EntitySet Name="States_Tasks" EntityType="Self.States_Tasks" />
           <EntitySet Name="Tasks_Progress" EntityType="Self.Tasks_Progress" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <FunctionImport Name="GetTasksProgressByUser" EntitySet="Tasks_Progress" ReturnType="Collection(TaskManagerModel.Tasks_Progress)">
@@ -113,6 +137,18 @@
                 <ScalarProperty Name="User_add" ColumnName="User_add" />
                 <ScalarProperty Name="User_last_upd" ColumnName="User_last_upd" />
                 <ScalarProperty Name="Priority_description" ColumnName="Priority_description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States_Tasks">
+            <EntityTypeMapping TypeName="TaskManagerModel.States_Tasks">
+              <MappingFragment StoreEntitySet="States_Tasks">
+                <ScalarProperty Name="State_id" ColumnName="State_id" />
+                <ScalarProperty Name="Date_add" ColumnName="Date_add" />
+                <ScalarProperty Name="Date_last_upd" ColumnName="Date_last_upd" />
+                <ScalarProperty Name="User_add" ColumnName="User_add" />
+                <ScalarProperty Name="User_last_upd" ColumnName="User_last_upd" />
+                <ScalarProperty Name="State_description" ColumnName="State_description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

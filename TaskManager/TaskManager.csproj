@@ -140,6 +140,9 @@
     <Compile Include="Models\Priorities_Tasks.cs">
       <DependentUpon>TaskManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\States_Tasks.cs">
+      <DependentUpon>TaskManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TaskManagerModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -202,13 +205,6 @@
     <Content Include="Scripts\alertify.js" />
     <Content Include="Scripts\alertify.min.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\TaskManagerModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TaskManagerModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\TaskManagerModel.edmx.diagram">
-      <DependentUpon>TaskManagerModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\mdb.min.js" />
@@ -231,6 +227,13 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="Models\TaskManagerModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TaskManagerModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\TaskManagerModel.edmx.diagram">
+      <DependentUpon>TaskManagerModel.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Tasks\AllTasks.cshtml" />
   </ItemGroup>

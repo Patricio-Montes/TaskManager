@@ -32,7 +32,6 @@ namespace TaskManager.Controllers
             taskList = response.Content.ReadAsAsync<IEnumerable<Tasks>>().Result;
             if (response.IsSuccessStatusCode)
             {
-                //return Json(new { data = taskList}, JsonRequestBehavior.AllowGet);
                 return View(taskList);
             }
             else

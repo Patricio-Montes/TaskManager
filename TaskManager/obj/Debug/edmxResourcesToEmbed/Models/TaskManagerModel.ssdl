@@ -11,6 +11,17 @@
     <Property Name="User_last_upd" Type="int" />
     <Property Name="Priority_description" Type="varchar" MaxLength="60" />
   </EntityType>
+  <EntityType Name="States_Tasks">
+    <Key>
+      <PropertyRef Name="State_id" />
+    </Key>
+    <Property Name="State_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date_add" Type="datetime" />
+    <Property Name="Date_last_upd" Type="datetime" />
+    <Property Name="User_add" Type="int" />
+    <Property Name="User_last_upd" Type="int" />
+    <Property Name="State_description" Type="varchar" MaxLength="60" />
+  </EntityType>
   <EntityType Name="Tasks_Progress">
     <Key>
       <PropertyRef Name="Id" />
@@ -18,7 +29,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="State_id" Type="int" />
     <Property Name="State_description" Type="varchar" MaxLength="60" />
-    <Property Name="Percentage" Type="numeric" Precision="18" Scale="1" />
+    <Property Name="Percentage" Type="int" />
     <Property Name="UserID" Type="int" />
   </EntityType>
   <EntityType Name="Users">
@@ -41,6 +52,7 @@
   </Function>
   <EntityContainer Name="TaskManagerModelStoreContainer">
     <EntitySet Name="Priorities_Tasks" EntityType="Self.Priorities_Tasks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="States_Tasks" EntityType="Self.States_Tasks" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tasks_Progress" EntityType="Self.Tasks_Progress" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
   </EntityContainer>

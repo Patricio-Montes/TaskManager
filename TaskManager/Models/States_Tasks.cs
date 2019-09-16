@@ -13,24 +13,19 @@ namespace TaskManager.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class User
+    public partial class States_Tasks
     {
-        public int User_id { get; set; }
+        public int State_id { get; set; }
         public Nullable<System.DateTime> Date_add { get; set; }
         public Nullable<System.DateTime> Date_last_upd { get; set; }
         public Nullable<int> User_add { get; set; }
         public Nullable<int> User_last_upd { get; set; }
-        public string User_name { get; set; }
-        public string Usr_password { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Email_adrress { get; set; }
+        public string State_description { get; set; }
 
-        public List<User> GetList()
+        public List<States_Tasks> GetList()
         {
             TaskManagerEntities DbContext = new TaskManagerEntities();
-            return DbContext.Users.ToList();
+            return DbContext.States_Tasks.ToList();
         }
-
     }
 }
