@@ -38,8 +38,8 @@
                             <td class="pt-3-half">@task.Task_id</td>
                             <td class="pt-3-half">@task.Task_Title</td>
                             <td class="pt-3-half">@task.Task_description</td>
-                            <td class="pt-3-half">@task.Responsible.Find(x=> x.User_id == task.User_respon).Name</td>
-                            <td class="pt-3-half">@task.Priorities.Find(x=> x.Priority_id == task.Priority_id).Priority_description</td>
+                            <td class="pt-3-half">@task.Responsible.Find(x => x.User_id == task.User_respon).Name</td>
+                            <td class="pt-3-half">@task.Priorities.Find(x => x.Priority_id == task.Priority_id).Priority_description</td>
                             <td class="pt-3-half">@task.Expiration_date</td>
                             <td>
                                 <span class="table-remove">
@@ -65,7 +65,6 @@
     </div>
 </div>
 <!-- /MDB table -->
-
 <!-- Collapse Progress button -->
 <br />
 <div>
@@ -74,7 +73,6 @@
     </a>
 </div>
 <!-- /Collapse Progress button -->
-
 <!-- Collapsible Progress Bar -->
 <div class="collapse" id="ProgressCollapse">
     <div class="mt-3">
@@ -86,7 +84,6 @@
     </div>
 </div>
 <!-- /Collapsible Progress Bar -->
-
 <!-- Modal Add/Edit Tasks -->
 <div class="modal fade" id="TaskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
@@ -112,8 +109,8 @@
 </div>
 <!-- /Modal Add/Edit Tasks -->
 
-
 @section scripts{
+
     <script>
        $(function () {
           var successMessage = '@TempData["SuccessMessage"]'
@@ -170,6 +167,5 @@
                 setData.append(Data);
             }
         };
-
     </script>
 }

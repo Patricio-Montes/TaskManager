@@ -17,6 +17,7 @@ namespace TaskManager
             bundles.Add(new ScriptBundle("~/bundles/Scripts").Include(
                       "~/Scripts/jquery-3.4.1.min.js",
                       "~/Scripts/alertify.min.js",
+                      "~/Scripts/jquery.dataTables.min.js",
                       "~/Scripts/bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -24,6 +25,7 @@ namespace TaskManager
                       "~/Content/mdb.min.css",
                       "~/Content/alertifyjs/themes/bootstrap.min.css",
                       "~/Content/alertifyjs/alertify.min.css",
+                      "~/Content/jquery.dataTables.min.css",
                       "~/Content/site.css"));
         }
     }

@@ -15,10 +15,23 @@ namespace TaskManagerAPI.Controllers
     {
         private readonly TaskManagerApiEntities db = new TaskManagerApiEntities();
 
-        public IQueryable<Task> GetTasks()
+        public List<Task> GetTasks()
         {
-            // Se recuperan todas las tareas asignadas al usuario logueado, que aun no completo. 
-            return db.Tasks.Where(a => a.User_respon == 1 && a.State_id != 2);
+            // Se realiza un union para recuperar las tareas eliminadas. Se encuentran auditadas en la tabla Audit_Tasks. 
+            var taskList = db.Tasks.SqlQuery(@"select Task_id, Task_Title, Task_description, User_respon, Priority_id, Expiration_date, State_id
+                                               from Tasks with (nolock)
+                                               where User_respon = 1         
+                                               union
+                                               select Task_id, Task_Title, Task_description, User_respon, Priority_id, Expiration_date, State_id
+                                               from Audit_Tasks with (nolock)
+                                               where Audit_Tasks.User_respon = 1 and Audit_Tasks.Operation_type = 'D'").ToList();
+            return taskList;
+        }
+
+        public IQueryable<Task> GetTasks(int userID, int stateID)
+        {
+            // Tareas por usuario y por estado. Se utiliza para excluir de la lista de tareas pendientes las completadas (Estado 2)
+            return db.Tasks.Where(a => a.User_respon == userID && a.State_id != stateID);
         }
 
         [ResponseType(typeof(Task))]

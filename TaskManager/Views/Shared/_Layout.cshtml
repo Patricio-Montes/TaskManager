@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Gestión de Tareas </title>
+    <title>@ViewBag.Title Gestión de Tareas </title>
     @Styles.Render("~/Content/css")
 
     <!-- Font Awesome -->
@@ -15,21 +15,13 @@
 
     <!-- Menu -->
     <div class="Menu">
-        <div class="item">
-            <i class="fas fa-fw fa-bars"></i>
+        <div class="item" onclick="location.href='@Url.Action("Index", "Tasks")'">
+            <i class="fas fa-fw fa-user-circle"></i> Dashboard
         </div>
-        <div class="item active">
-            <i class="fas fa-fw fa-map-marked-alt"></i> Map
+        <div class="item" onclick="location.href='@Url.Action("AllTasks", "Tasks")'">
+            <i class="fas fa-fw fa-th" ></i> Listado
         </div>
-        <div class="item">
-            <i class="fas fa-fw fa-columns"></i> Split
-        </div>
-        <div class="item">
-            <i class="fas fa-fw fa-th"></i> Grid
-        </div>
-        <div class="item">
-            <i class="fas fa-fw fa-user-circle"></i> Dash
-        </div>
+
     </div>
     <!-- /Menu -->
     <!-- Navbar -->
@@ -49,8 +41,8 @@
     <footer class="page-footer font-small bg-dark">
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">
-            © 2018 Copyright:
-            <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+            <i class="fab fa-github"></i>
+            <a href="https://github.com/Patricio-Montes/TaskManager" target="_blank"> Git Repo </a>
         </div>
         <!-- Copyright -->
 
